@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;0,800;1,400&family=Russo+One&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+    <div id="container">
+        <div class="content">
+            <div class="top">
+                <div class="content_name">
+                    <div class="team_name">
+                        <span>BRATVA</span>™
+                    </div>
+                    <b>SISTEMA DE CONTROLE</b>
+                </div>
+                <div class="menu">
+                    <div class="item_menu select" onclick="openSection('painel')">Painel</div>
+                    <div class="item_menu bank" onclick="openSection('bank')">Banco</div>
+                    <div class="item_menu ranking" onclick="openSection('ranking')">Ranking</div>
+                    <!-- <div class="item_menu" onclick="openSection('bau')">Bau</div> -->
+                    <div class="item_menu contratar" onclick="openModal('contract')">Contratar</div>
+                    <div class="item_menu pedircontas">Pedir Contas</div>
+                </div>
+            </div>
+
+            <div class="section section_painel">
+                <div class="infos">
+                    <div class="item_info">
+                        <div class="title_info members_online">ONLINE</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info slot">VAGAS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info members">MEMBROS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info saldo">
+                        <div class="title_info">SALDO</div>
+                        <div class="result_info">500 000 000</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="top_list">
+                        <span id="span_on">&nbsp;</span>
+                        <span>NOME</span>
+                        <span id="span_carge">CARGO</span>
+                        <span id="span_last">ULTIMO LOGIN</span>
+                    </div>
+                    <div class="list_members list_painel">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section_bank">
+                <div class="infos2">
+                    <div class="item_info" id="deposit" onclick="openModal('deposit')">
+                        <div class="result_info">DEPOSITAR</div>
+                    </div>
+                    <div class="item_info" id="withdraw" onclick="openModal('withdraw')">
+                        <div class="result_info">SACAR</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="top_list">
+                        <span id="span_on">&nbsp;</span>
+                        <span>NOME</span>
+                        <span id="span_carge">AÇÃO</span>
+                        <span id="span_last">VALOR</span>
+                    </div>
+                    <div class="list_members list_bank">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section_ranking">
+                <div class="infos">
+                    <div class="item_info">
+                        <div class="title_info">ONLINE</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info">VAGAS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info">MEMBROS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info saldo">
+                        <div class="title_info">SALDO</div>
+                        <div class="result_info">500 000 000</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="top_list">
+                        <span>POS</span>
+                        <span id="span_carge">GRUPO</span>
+                        <span id="span_last">SALDO</span>
+                    </div>
+                    <div class="list_members list_ranking">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section section_bau">
+                <div class="infos">
+                    <div class="item_info">
+                        <div class="title_info">ONLINE</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info">VAGAS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info">
+                        <div class="title_info">MEMBROS</div>
+                        <div class="result_info">17</div>
+                    </div>
+                    <div class="item_info saldo">
+                        <div class="title_info">SALDO</div>
+                        <div class="result_info">500 000 000</div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="top_list">
+                        <span id="span_on">&nbsp;</span>
+                        <span>NOME</span>
+                        <span id="span_carge">AÇÃO</span>
+                        <span id="span_last">ITEM</span>
+                    </div>
+                    <div class="list_members">
+                        <div class="item_member">
+                            <div class="stats">
+                                <div class="on"></div>
+                            </div>
+                            <div class="content_list name_members">Boliva Gostoso</div>
+                            <div class="content_list carge_members">GUARDOU</div>
+                            <div class="content_list last_login">wammo|WEAPON_SMG x2</div>
+
+                        </div>
+                        <div class="item_member">
+                            <div class="stats">
+                                <div class="on"></div>
+                            </div>
+                            <div class="content_list name_members">Boliva Gostoso</div>
+                            <div class="content_list carge_members">RETIROU</div>
+                            <div class="content_list last_login">MACONHA x2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal contract_modal">
+            <div class="fechar" onclick="closeModal()">+</div>
+            <div class="passaport">
+                Passaporte: <br>
+                <input id="inviteId" type="text">
+            </div>
+            <div class="member_modal_button">
+                <label>Cargo:</label>
+                <select id="contract_cargo" class="promove">
+                    
+                </select>
+            </div>
+            <div class="member_modal_button buttons">
+                <div class="confirmar" onclick="contract()">Confirmar</div>
+                <div class="cancelar" onclick="closeModal()">Cancelar</div>
+            </div>
+        </div>
+        <div class="modal member_modal">
+            <div class="fechar" onclick="closeModal()">+</div>
+            <div class="passaport">
+                Passaporte: <br>
+                <span>27</span>
+            </div>
+            <div class="member_modal_button cargos_select">
+                <label>Cargo:</label>
+                <select class="promove" id = "promove_cargo">
+                </select>
+            </div>
+            <div id="demitir">DEMITIR</div>
+            <div class="member_modal_button buttons">
+                <div class="confirmar" id = "promover">Confirmar</div>
+                <div class="cancelar" onclick="closeModal()">Cancelar</div>
+            </div>
+        </div>
+        <div class="modal withdraw_modal">
+            <div class="fechar" onclick="closeModal()">+</div>
+            <div class="member_modal_button cargos_select">
+                <label>Valor para saque:</label>
+                <input type="text" id="qtd_withdraw">                
+            </div>
+            <div class="member_modal_button buttons">
+                <div class="confirmar" id = "sacar">Confirmar</div>
+                <div class="cancelar" onclick="closeModal()">Cancelar</div>
+            </div>
+        </div>
+        <div class="modal deposit_modal">
+            <div class="fechar" onclick="closeModal()">+</div>
+            <div class="member_modal_button cargos_select">
+                <label>Valor para deposito:</label>
+                <input type="text" id="qtd_deposit">
+            </div>
+            <div class="member_modal_button buttons">
+                <div class="confirmar" id = "depositar">Confirmar</div>
+                <div class="cancelar" onclick="closeModal()">Cancelar</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

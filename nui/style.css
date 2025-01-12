@@ -1,0 +1,481 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    /* background-image: url(https://cdn.discordapp.com/attachments/712754778018545767/880616490812964884/unknown.png); */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 105%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #fff;
+    font-family: 'Russo One', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5vh;
+   
+}
+
+
+#container{
+    display: none;
+    width: 100vh;
+    height: 57.3vh;
+    border-radius: 5px 5px 5px 5px;
+}
+
+
+.content{
+    width: 100vh;
+    height: 60vh;
+    border-radius: 10px 10px 10px 10px;
+    background: radial-gradient(50% 50% at 50% 50%, #1212318c 0%, rgba(8, 9, 15, 0.93) 100%);
+}
+
+.top{
+    width: 100%;
+    height: 8vh;
+    border-radius: 5px 5px 5px 5px;
+
+    background: #170d1b;
+}
+
+.content_name{
+    width: 40%;
+    height: 100%;
+
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    padding-left: 5vh;
+}
+
+
+.team_name{
+    font-size: 3vh;
+}
+
+.content_name b{
+    font-weight: 400 !important;
+    font-size: 1.2vh;
+}
+
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu{
+    width: 60%;
+
+    display: flex;
+    align-items:center;
+    justify-content: flex-end;
+    padding-right: 5vh;
+}
+
+.item_menu{
+    margin-right: 1vh;
+    transition: all .2s ease-in-out;
+    border-radius: 4px red;
+}
+
+.item_menu:hover{
+    transform: scale(1.1);
+}
+
+.bank {
+    padding: 1vh;
+    background: linear-gradient(180deg, #00FFF0 0%, #0B827B 100%);
+    border-radius: 5px;
+
+}
+
+.select {
+    padding: 1vh;
+    background: linear-gradient(180deg, #00FFF0 0%, #0B827B 100%);
+    border-radius: 5px;
+}
+
+.ranking {
+    padding: 1vh;
+    background: linear-gradient(180deg, #00FFF0 0%, #0B827B 100%);
+    border-radius: 5px;
+}
+
+.contratar{
+    padding: 1vh;
+    background: linear-gradient(180deg, #00FFF0 0%, #0B827B 100%);
+    border-radius: 5px;
+}
+
+.pedircontas{
+    padding: 1vh;
+    background: linear-gradient(180deg, #ec342d 0%, #ad1414 100%);
+    border-radius: 5px;
+}
+
+.infos, .infos2{
+    width: 100%;
+    height: 10vh;
+
+    padding-right: 5vh;
+    padding-left: 5vh;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.section_bank .infos2{
+    justify-content: flex-start;
+}
+
+.section_bank .item_info{
+    margin-left: 1vh;
+}
+
+
+
+.item_info{
+
+    width: 20vh;
+
+    margin-top: 1vh;
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(88, 205, 255, 0.214912) 0%, rgba(88, 175, 255, 0) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.11);
+    box-sizing: border-box;
+    padding: .5vh;
+    position: relative;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.title_info{
+    position: absolute; 
+    left: 0.5vh;
+    top: 0.5vh;
+}
+
+
+.result_info{
+    font-size: 2.5vh;
+}
+
+.saldo{
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(132, 255, 88, 0.214912) 0%, rgba(132, 255, 88, 0) 100%);
+}
+
+
+.list{
+    width: 100%;
+    height: 42vh;
+
+    padding-right: 5vh;
+    padding-left: 5vh;
+    margin-top: 1vh;
+}
+
+.top_list{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 5vh;
+    padding-left: 5vh;
+}
+
+.top_list span{
+    display: flex;
+    width: 30%;
+}
+
+
+.list_members{
+    width: 100%;
+    height: 38vh;
+    overflow: auto;
+}
+
+
+.item_member{
+    width: 100%;
+    height: 5vh;
+    
+    display: flex;
+    align-items: center;
+
+    margin-top: 1vh;
+    background: #1A1A1A;
+    padding-right: 5vh;
+    padding-left: 5vh;
+}
+
+
+.item_member:hover{
+    background: #2a2a2a;
+}
+
+#span_on{
+    width: 10%;
+}
+
+#span_last{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.stats{
+    width: 10%;
+}
+
+.content_list{
+    width: 30%;
+}
+
+.last_login{
+    
+    display: flex;
+    justify-content: flex-end;
+}
+
+.carge_members{
+    display: flex;
+    justify-content: center;
+
+}
+
+#span_carge{
+    display: flex;
+    justify-content: center;
+
+}
+
+.on, .deposito{
+    width: 1.5vh;
+    height: 1.5vh;
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(132, 255, 88, 0.214912) 0%, rgba(132, 255, 88, 0) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.off, .saque{
+    width: 1.5vh;
+    height: 1.5vh;
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(255, 88, 88, 0.214912) 0%, rgba(255, 88, 88, 0) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.member_modal{
+    position: absolute;
+    width: 30vh;
+    height: 25vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+
+    border-radius: 1vh;
+    background: #fff;
+    color: #000;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    display: none;
+}
+
+.withdraw_modal, .deposit_modal{
+    position: absolute;
+    width: 30vh;
+    height: 12vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    flex-direction: column;
+
+    border-radius: 1vh;
+    background: #fff;
+    color: #000;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    display: none;
+}
+
+
+.contract_modal{
+    position: absolute;
+    width: 30vh;
+    height: 20vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+
+    border-radius: 1vh;
+    background: #fff;
+    color: #000;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+
+    display: none;
+}
+
+.member_modal_button{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    width: 100%;
+    height: 33%;
+    flex-direction: column;
+}
+
+.passaport{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    width: 100%;
+    height: 33%;
+}
+
+.cancelar{
+    width: 10vh;
+    border-radius: 1vh;
+
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding: .5vh;
+    background: linear-gradient(180deg, #ff4040 0%, #820b0b 100%);
+    color: #fff;
+
+    margin-left: 1vh;
+    transition: all .2s ease-in-out;
+}
+
+.cancelar:hover{
+    transform: scale(1.03);
+}
+
+
+.confirmar{
+    width: 10vh;
+    border-radius: 1vh;
+
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    padding: .5vh;    
+    background: linear-gradient(180deg, #00FFF0 0%, #0B827B 100%);
+
+    color: #fff;
+
+    transition: all .2s ease-in-out;
+}
+
+.confirmar:hover{
+    transform: scale(1.03);
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.fechar{
+
+    position: absolute;
+    right: 1vh;
+    font-size: 2vh;
+    transform: rotate(45deg);
+}
+
+.fechar:hover{
+    transform: rotate(45deg) scale(1.3);
+}
+
+#demitir{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: all .2s ease-in-out;
+}
+
+#demitir:hover{
+    transform: scale(1.05);
+}
+
+select, .passaport input {
+    width: 50%;
+    height: 3vh;
+    font-size: 1.5vh;
+    text-align: center;
+}
+
+.section{
+    display: none;
+}
+
+.section_painel{
+    display: block;
+}
+
+#deposit{
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(132, 255, 88, 0.214912) 0%, rgba(132, 255, 88, 0) 100%);
+    transition: all .2s ease-in-out;
+}
+
+#withdraw{
+    background: radial-gradient(84.59% 84.59% at 47.67% 101.97%, rgba(255, 88, 88, 0.214912) 0%, rgba(255, 88, 88, 0) 100%);
+    transition: all .2s ease-in-out;
+}
+
+#deposit:hover, #withdraw:hover{
+    transform: scale(1.05);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #0d0d16; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
