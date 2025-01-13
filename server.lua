@@ -616,8 +616,6 @@ src.getMetaConfig = function(orgName)
 
     if user_id then
     
-        print("##################",orgName)
-
         local rows = vRP.query("flow_orgs/getOrg",{org = orgName})
 
 
@@ -625,11 +623,6 @@ src.getMetaConfig = function(orgName)
         
             local dailyMeta = json.decode(rows[1].daily_meta) or {}
             local paymentMeta = rows[1].payment_meta or 0
-
-
-            print("DEBUG: daily_meta (JSON bruto):", rows[1].daily_meta) -- Verifica o conteúdo de daily_meta
-            print("DEBUG: daily_meta (decodificado):", dailyMeta) -- Verifica se o JSON foi decodificado corretamente
-            print("DEBUG: payment_meta:", paymentMeta) -- Confirma o valor do pagamento
 
             return {dailyMeta = dailyMeta, paymentMeta = paymentMeta
 }

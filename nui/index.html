@@ -28,7 +28,7 @@
                     <b>SISTEMA DE CONTROLE</b>
                 </div>
                 <div class="menu">
-                    <div class="item_menu " onclick="openConfigMeta('NomeDaOrganizacao')">Configurar Meta</div>
+                    <div class="item_menu config" onclick="openConfigMeta('NomeDaOrganizacao')">Configurar Meta</div>
                     <div class="item_menu select" >Meta</div>
                     <div class="item_menu select" onclick="openSection('painel')">Painel</div>
                     <div class="item_menu bank" onclick="openSection('bank')">Banco</div>
@@ -177,16 +177,16 @@
             <input type="hidden" id="orgName">
 
             <div class="fechar" onclick="closeModal()">+</div>
-            <h3>Configurar Meta</h3>
+            <h2>Configurar Meta</h2>
             <div class="meta_form">
 
                 <div class="input_group">
                     
-                    <div>
+                    <div >
                         <label>Produto 01:</label>
                         <input type="text" id="produto_1">
                     </div>
-                    <div>
+                    <div class="inputs_label">
                         <label>Quantidade</label>
                         <input type="number" id="quantidade_1" min="0">
                     </div>
@@ -234,7 +234,7 @@
                 
                 <div class="input_group">
                     
-                    <div>
+                    <div class="inp_paiment">
                         <label>Pagamento:</label>
                         <input type="number" id="payment_meta" min="0">
                     </div>
