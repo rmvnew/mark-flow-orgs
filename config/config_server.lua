@@ -1,6 +1,7 @@
 allGroups = module("cfg/groups")
 config = {}
 
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- QUERYS
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -618,6 +619,9 @@ config.langs = {
     notWithdraw = function(source, total) return TriggerClientEvent("Notify",source, "negado","O Cofre não possui esse valor..", 5) end,
     deposit = function(source, total) return TriggerClientEvent("Notify",source, "sucesso","Você Depositou <b>R$ "..vRP.format(total).."</b>", 5) end,
     notMoney = function(source, total) return TriggerClientEvent("Notify",source, "sucesso","Você não possui <b>R$ "..vRP.format(total).."</b> para depositar.", 5) end,
+    metaConfigurada = function(source) return TriggerClientEvent("Notify",source,"sucesso","Meta configurada com sucesso!!",5) end,
+    metaNaoConfigurada = function(source) return TriggerClientEvent("Notify",source,"negado","Meta não configurada!!",5) end,
+
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

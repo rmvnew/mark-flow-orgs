@@ -12,6 +12,7 @@ Proxy.addInterface("flow_orgs",src)
 vCLIENT = Tunnel.getInterface("flow_orgs")
 
 local autenticado = true
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare("getTop10", "SELECT org,banco FROM flow_orgs ORDER BY banco DESC LIMIT 10")
 src.getInfosOrg = function(org)
@@ -581,4 +582,28 @@ function sendToDiscord(weebhook, message)
 end
 
 
+
+vRP.prepare("flow_orgs/updateMeta", "UPDATE flow_orgs SET daily_meta = @daily_meta, payment_meta = @payment_meta WHERE org = @org")
+src.configurarMeta = function(orgName, produtos,pagamento)
+
+    local source = source
+    local user_id = vRP.getUserId(source)
+
+    if user_id and src.checkLiderPermission(user_id,orgName) then
+        local produtosJson = json.encode(produtos)
+
+        vRP.execute("flow_orgs/updateMeta",{
+            ["@daily_meta"] = produtosJson,
+            ["@payment_meta"] = pagamento,
+            ["@org"] = orgName
+        })
+
+        config.langs['metaConfigurada'](source)
+
+    else
+    
+        config.langs['metaNaoConfigurada'](source)
+
+    end        
+end    
 

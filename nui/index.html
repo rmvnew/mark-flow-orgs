@@ -28,6 +28,8 @@
                     <b>SISTEMA DE CONTROLE</b>
                 </div>
                 <div class="menu">
+                    <div class="item_menu " onclick="openConfigMeta('NomeDaOrganizacao')">Configurar Meta</div>
+                    <div class="item_menu select" >Meta</div>
                     <div class="item_menu select" onclick="openSection('painel')">Painel</div>
                     <div class="item_menu bank" onclick="openSection('bank')">Banco</div>
                     <div class="item_menu ranking" onclick="openSection('ranking')">Ranking</div>
@@ -168,6 +170,88 @@
             </div>
 
         </div>
+
+
+        <div class="modal meta_config_modal">
+
+            <input type="hidden" id="orgName">
+
+            <div class="fechar" onclick="closeModal()">+</div>
+            <h3>Configurar Meta</h3>
+            <div class="meta_form">
+
+                <div class="input_group">
+                    
+                    <div>
+                        <label>Produto 01:</label>
+                        <input type="text" id="produto_1">
+                    </div>
+                    <div>
+                        <label>Quantidade</label>
+                        <input type="number" id="quantidade_1" min="0">
+                    </div>
+
+                </div>
+                
+                <div class="input_group">
+                    
+                    <div>
+                        <label>Produto 02:</label>
+                        <input type="text" id="produto_2">
+                    </div>
+                    <div>
+                        <label>Quantidade</label>
+                        <input type="number" id="quantidade_2" min="0">
+                    </div>
+
+                </div>
+               
+                <div class="input_group">
+                    
+                    <div>
+                        <label>Produto 03:</label>
+                        <input type="text" id="produto_3">
+                    </div>
+                    <div>
+                        <label>Quantidade</label>
+                        <input type="number" id="quantidade_3" min="0">
+                    </div>
+
+                </div>
+                
+                <div class="input_group">
+                    
+                    <div>
+                        <label>Produto 04:</label>
+                        <input type="text" id="produto_4">
+                    </div>
+                    <div>
+                        <label>Quantidade</label>
+                        <input type="number" id="quantidade_4" min="0">
+                    </div>
+
+                </div>
+                
+                <div class="input_group">
+                    
+                    <div>
+                        <label>Pagamento:</label>
+                        <input type="number" id="payment_meta" min="0">
+                    </div>
+                    
+
+                </div>
+
+                <div class="meta_buttons">
+                    <button class="confirmar" onclick="saveMeta()">Salvar</button>
+                    <button class="cancelar" onclick="closeModal()">Cancelar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
         <div class="modal contract_modal">
             <div class="fechar" onclick="closeModal()">+</div>
             <div class="passaport">

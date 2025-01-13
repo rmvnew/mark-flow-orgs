@@ -203,3 +203,33 @@ $(document).ready(function () {
         $.post('http://flow_orgs/closeNUI', JSON.stringify({}));
     });
 });
+
+
+function openConfigMeta(){
+    $('.meta_config_modal').show()
+    $('#orgName').val(orgName)
+}
+
+function saveMeta(){
+    const meta = {
+        orgName: $('#orgName').val(),
+        produtos: [
+            {nome: $('#produto_1').val(),quantidade: $('#quantidade_1').val()},
+            {nome: $('#produto_2').val(),quantidade: $('#quantidade_2').val()},
+            {nome: $('#produto_3').val(),quantidade: $('#quantidade_3').val()},
+            {nome: $('#produto_4').val(),quantidade: $('#quantidade_4').val()},
+        ],
+        pagamento: $('#payment_meta').val()
+    }
+
+    meta.produtos = meta.produtos.filter(p=> p.name || p.quantidade)
+
+    $.post('http://flow_orgs/configurarMeta',JSON.stringify(meta),function(response){
+        if(response.success){
+            alert('Meta configurada com sucesso')
+            closeModal()
+        }else{
+            alert('Erro ao configurar meta.')
+        }
+    })
+}

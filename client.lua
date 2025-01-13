@@ -81,3 +81,19 @@ end)
 RegisterNUICallback('depositar', function(data)
     vSERVER._depositar(data.orgName, data.value)
 end)
+
+
+RegisterNUICallback('configurarMeta', function(data)
+
+    if data then
+        vSERVER.configurarMeta(data.orgName, data.produtos, data.pagamento)
+    end    
+
+end)
+
+function src.openConfigMeta(orgName)
+
+    SetNuiFocus(true,true)
+    SendNuiMessage({showConfigMeta = true, orgName= orgName})
+
+end    

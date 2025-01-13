@@ -125,6 +125,7 @@ body {
     padding: 1vh;
     background: linear-gradient(180deg, #ec342d 0%, #ad1414 100%);
     border-radius: 5px;
+    white-space: nowrap;
 }
 
 .infos, .infos2{
@@ -479,3 +480,54 @@ select, .passaport input {
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+  .meta_config_modal {
+    position: absolute;
+    width: 40vh;
+    height: auto;
+    padding: 2vh;
+    border-radius: 1vh;
+    background: #fff;
+    color: #000;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    display: none;
+}
+
+.meta_config_modal h3 {
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.meta_form .input_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1vh;
+}
+
+.meta_form .input_group label {
+    margin-bottom: 0.5vh;
+    font-size: 1.2vh;
+}
+
+.meta_form .input_group input {
+    padding: 0.5vh;
+    font-size: 1.2vh;
+    margin-bottom: 1vh;
+}
+
+.meta_buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.meta_buttons button {
+    width: 45%;
+    padding: 0.7vh;
+    font-size: 1.2vh;
+    border-radius: 0.5vh;
+    cursor: pointer;
+}
