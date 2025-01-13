@@ -607,3 +607,37 @@ src.configurarMeta = function(orgName, produtos,pagamento)
     end        
 end    
 
+
+
+src.getMetaConfig = function(orgName)
+
+    local source = source
+    local user_id = vRP.getUserId(source)
+
+    if user_id then
+    
+        print("##################",orgName)
+
+        local rows = vRP.query("flow_orgs/getOrg",{org = orgName})
+
+
+        if #rows > 0 then
+        
+            local dailyMeta = json.decode(rows[1].daily_meta) or {}
+            local paymentMeta = rows[1].payment_meta or 0
+
+
+            print("DEBUG: daily_meta (JSON bruto):", rows[1].daily_meta) -- Verifica o conteúdo de daily_meta
+            print("DEBUG: daily_meta (decodificado):", dailyMeta) -- Verifica se o JSON foi decodificado corretamente
+            print("DEBUG: payment_meta:", paymentMeta) -- Confirma o valor do pagamento
+
+            return {dailyMeta = dailyMeta, paymentMeta = paymentMeta
+}
+        else
+            print("^1[ERRO] Ornanização não encontrada para orgName: "..tostring(orgName).."'^0")
+            return {dailymeta = {}, paymentMeta = 0}
+        end    
+        
+    end    
+
+end    

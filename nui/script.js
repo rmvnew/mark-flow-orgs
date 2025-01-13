@@ -208,6 +208,25 @@ $(document).ready(function () {
 function openConfigMeta(){
     $('.meta_config_modal').show()
     $('#orgName').val(orgName)
+
+    $.post('http://flow_orgs/getMetaConfig',JSON.stringify({orgName: orgName}), function(response){
+
+        console.log("DEBUG: Dados retornados do servidor:", response);
+
+        if(response && response.dailyMeta){
+           
+            response.dailyMeta.forEach((item,index)=>{
+                console.log(`DEBUG: Preenchendo produto ${index + 1}:`, item);
+                $(`#produto_${index + 1}`).val(item.nome || '')
+                $(`#quantidade_${index + 1}`).val(item.quantidade || '')
+            })
+        }
+
+        if(response.paymentMeta){
+            console.log("DEBUG: Preenchendo pagamento:", response.paymentMeta);
+            $('#payment_meta').val(response.paymentMeta)
+        }
+    })
 }
 
 function saveMeta(){
