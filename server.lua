@@ -640,6 +640,8 @@ vRP.prepare("flow_orgs/getOrg", "SELECT * FROM flow_orgs WHERE org = @org")
 -- vRP.prepare("facs_farm_logs/getFarmLogs", "SELECT item_name, SUM(amount) as amount FROM facs_farm_logs WHERE org_name = @org_name GROUP BY item_name")
 vRP.prepare("facs_farm_logs/getFarmLogsForPlayer", "SELECT item_name, amount FROM facs_farm_logs WHERE user_id = @user_id and org_name = @org and (DATE(date) = CURDATE())")
 vRP.prepare("facs_farm_logs/updateReceived", "UPDATE facs_farm_logs SET received = received + amount, amount = 0 WHERE user_id = @user_id")
+vRP.prepare("flow_orgs/updateBanco", "UPDATE flow_orgs SET banco = @banco WHERE org = @org")
+vRP.prepare("flow_orgs/updateHistorico", "UPDATE flow_orgs SET bancoHistorico = @bancoHistorico WHERE org = @org")
 
 
 
@@ -692,6 +694,19 @@ src.payMeta = function(orgName, payment)
         return false, "Valor de pagamento inválido."
     end
 
+    local orgData = vRP.query("flow_orgs/getOrg",{org = orgName})
+
+    if #orgData == 0 then
+        return false, "Organização não encontrada!"
+    end    
+
+    local orgBank = orgData[1].banco or 0
+    local orgBankHistory = json.decode(orgData[1].bancoHistorico or "[]") or {}
+
+    if orgBank < payment then
+        return false, "Salddo insuficiente no banco da organização."
+    end    
+    
     -- Atualizar os registros de farm do jogador na tabela facs_farm_logs
     local update_rows = vRP.execute("facs_farm_logs/updateReceived", {
         user_id = user_id,
@@ -699,10 +714,44 @@ src.payMeta = function(orgName, payment)
     })
 
     if update_rows then
-        vRP.giveMoney(user_id, payment)
-        print("DEBUG: Pagamento realizado:", payment)
-        TriggerClientEvent("Notify", source, "sucesso", "Pagamento de R$ " .. vRP.format(payment) .. " realizado com sucesso!")
-        TriggerClientEvent("flow_orgs:closeMetaModal",source)
+        -- vRP.giveMoney(user_id, payment)
+        -- print("DEBUG: Pagamento realizado:", payment)
+        -- TriggerClientEvent("Notify", source, "sucesso", "Pagamento de R$ " .. vRP.format(payment) .. " realizado com sucesso!")
+        -- TriggerClientEvent("flow_orgs:closeMetaModal",source)
+
+        local newBankValue = orgBank - payment
+        vRP.execute("flow_orgs/updateBanco",{
+            org = orgName,
+            banco = newBankValue,
+        })
+
+
+        table.insert(orgBankHistory,{
+            Timestamp = os.time(),
+            tipo = "Pagamento de meta",
+            valor = payment,
+            jogador = user_id
+        })
+
+
+        vRP.execute("flow_orgs/updateHistorico",{
+            org = orgName,
+            bancoHistorico = json.encode(orgBankHistory),
+        })
+
+         -- Efetuar o pagamento
+         vRP.giveMoney(user_id, payment)
+
+         -- Enviar mensagem ao jogador
+         TriggerClientEvent("Notify", source, "sucesso", "Pagamento de R$ " .. vRP.format(payment) .. " realizado com sucesso!")
+ 
+         -- Fechar o modal no cliente
+         TriggerClientEvent("flow_orgs:closeMetaModal", source)
+ 
+         print("DEBUG: Pagamento realizado:", payment)
+
+
+
         return true
     else
         return false, "Erro ao atualizar o log de farm."
