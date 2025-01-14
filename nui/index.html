@@ -29,7 +29,7 @@
                 </div>
                 <div class="menu">
                     <div class="item_menu config" onclick="openConfigMeta('NomeDaOrganizacao')">Configurar Meta</div>
-                    <div class="item_menu select" >Meta</div>
+                    <div class="item_menu select" onclick="openMetaModal('NomeDaOrganizacao')">Meta</div>
                     <div class="item_menu select" onclick="openSection('painel')">Painel</div>
                     <div class="item_menu bank" onclick="openSection('bank')">Banco</div>
                     <div class="item_menu ranking" onclick="openSection('ranking')">Ranking</div>
@@ -170,6 +170,37 @@
             </div>
 
         </div>
+
+
+        <div class="meta_view_modal" style="display: none;">
+
+            <input type="hidden" id="metaOrgName">
+
+            <h3>Configuração da Meta</h3>
+        
+            <!-- Informações sobre a meta -->
+            <div id="meta_details">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        
+            <!-- Progresso do farm do jogador -->
+            <h4>Progresso do Jogador</h4>
+            <div id="farm_progress">
+                <!-- Preenchido dinamicamente -->
+            </div>
+        
+            <!-- Campo para selecionar o jogador -->
+            <label for="player_id">ID do Jogador:</label>
+            <input type="number" id="player_id" placeholder="ID do jogador">
+        
+            <!-- Valor a ser pago -->
+            <p><strong>Valor Total Proporcional:</strong> R$ <span id="payment_value">0</span></p>
+        
+            <!-- Botão para realizar o pagamento -->
+            <button id="pay_button" onclick="payMeta()" disabled>Pagar Meta</button>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+        
 
 
         <div class="modal meta_config_modal">

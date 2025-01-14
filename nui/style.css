@@ -568,3 +568,65 @@ select, .passaport input {
     border-radius: 0.5vh;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+.meta_view_modal {
+    display: none; /* O modal está oculto por padrão */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00FFF0;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    z-index: 1000;
+}
+
+.meta_view_modal h3, .meta_view_modal h4 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.meta_view_modal ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.meta_view_modal ul li {
+    margin-bottom: 5px;
+}
+
+.meta_view_modal button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.meta_view_modal button#pay_button {
+    background-color: #00FFF0;
+    color: black;
+}
+
+.meta_view_modal button#pay_button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.meta_view_modal button:last-child {
+    background-color: #ec342d;
+    color: white;
+}
+
+
