@@ -268,8 +268,6 @@ function openMetaModal() {
         console.log("DEBUG: Dados da meta retornados:", JSON.stringify(response, null, 2));
         // console.log("DEBUG: Valor de data.infos[0]:", data.infos[0]);
 
-
-
         if (!response || !response.dailyMeta || !response.paymentMeta) {
             $('#meta_details').html('<p>Erro ao carregar os dados da meta.</p>');
             $('#farm_progress').html('<p>Erro ao carregar o progresso do jogador.</p>');
@@ -294,8 +292,18 @@ function openMetaModal() {
         farmHTML += '</ul>';
         $('#farm_progress').html(farmHTML);
 
+        
         // Calcular o valor proporcional
         const totalFarm = farm.reduce((sum, f) => sum + f.amount, 0);
+        const totalQuantidade = response.dailyMeta.reduce((sum, item) => sum + (parseInt(item.quantidade) || 0), 0);
+        const paymentMeta = response.paymentMeta
+        
+        console.log('farm_feito: ',totalFarm);
+        console.log('farm_configurado: ',totalQuantidade);
+        console.log('farm_payment: ',paymentMeta);
+        
+        
+        
         const paymentValue = (totalFarm / response.totalMeta) * response.paymentMeta;
 
         $('#payment_value').text(isNaN(paymentValue) ? 0 : paymentValue.toFixed(2));

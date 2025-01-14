@@ -663,17 +663,19 @@ src.getMetaDetails = function(orgName)
             })
 
 
-            local totalMeta = 0
-            for _,log in ipairs(farmLogs) do
-                totalMeta = totalMeta + (log.amount or 0)
-            end    
+            -- print(">>>>>>>>>>",dailyMeta)
+
+            -- local totalMeta = 0
+            -- for _,log in ipairs(farmLogs) do
+            --     totalMeta = totalMeta + (log.amount or 0)
+            -- end    
 
             -- Retorna os dados corretamente
             return {
                 dailyMeta = dailyMeta,
                 paymentMeta = paymentMeta,
                 farm = farmLogs,
-                totalMeta = totalMeta
+                totalMeta = 0
             }
         else
             print("^1[ERRO] Organização não encontrada para orgName: " .. tostring(orgName) .. "^0")
