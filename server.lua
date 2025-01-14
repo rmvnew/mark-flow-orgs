@@ -637,8 +637,8 @@ end
 
 
 vRP.prepare("flow_orgs/getOrg", "SELECT * FROM flow_orgs WHERE org = @org")
-vRP.prepare("facs_farm_logs/getFarmLogs", "SELECT item_name, SUM(amount) as amount FROM facs_farm_logs WHERE org_name = @org_name GROUP BY item_name")
-vRP.prepare("facs_farm_logs/getFarmLogsForPlayer", "SELECT item_name, amount FROM facs_farm_logs WHERE user_id = @user_id")
+-- vRP.prepare("facs_farm_logs/getFarmLogs", "SELECT item_name, SUM(amount) as amount FROM facs_farm_logs WHERE org_name = @org_name GROUP BY item_name")
+vRP.prepare("facs_farm_logs/getFarmLogsForPlayer", "SELECT item_name, amount FROM facs_farm_logs WHERE user_id = @user_id and org_name = @org and (DATE(date) = CURDATE())")
 vRP.prepare("facs_farm_logs/updateReceived", "UPDATE facs_farm_logs SET received = received + amount, amount = 0 WHERE user_id = @user_id")
 
 
@@ -656,12 +656,24 @@ src.getMetaDetails = function(orgName)
             local dailyMeta = json.decode(rows[1].daily_meta or "[]") or {}
             local paymentMeta = rows[1].payment_meta or 0
 
+
+            local farmLogs = vRP.query("facs_farm_logs/getFarmLogsForPlayer",{
+                user_id = user_id,
+                org = orgName
+            })
+
+
+            local totalMeta = 0
+            for _,log in ipairs(farmLogs) do
+                totalMeta = totalMeta + (log.amount or 0)
+            end    
+
             -- Retorna os dados corretamente
             return {
                 dailyMeta = dailyMeta,
                 paymentMeta = paymentMeta,
-                farm = {},
-                totalMeta = 0
+                farm = farmLogs,
+                totalMeta = totalMeta
             }
         else
             print("^1[ERRO] Organização não encontrada para orgName: " .. tostring(orgName) .. "^0")
@@ -697,7 +709,10 @@ src.payMeta = function(playerId)
                 end
 
                 -- Buscar progresso do farm
-                local farmLogs = vRP.query("facs_farm_logs/getFarmLogsForPlayer", { user_id = playerId })
+                local farmLogs = vRP.query("facs_farm_logs/getFarmLogsForPlayer", { 
+                    user_id = playerId ,
+                    org = orgName
+                })
                 local totalFarm = 0
 
                 for _, log in ipairs(farmLogs) do
