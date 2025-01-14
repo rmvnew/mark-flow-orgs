@@ -252,3 +252,107 @@ function saveMeta(){
         }
     })
 }
+
+
+
+function openMetaModal() {
+    $('.meta_view_modal').show(); // Exibe o modal
+
+    // Define o valor de orgName no input hidden com ID único
+    $('#metaOrgName').val(orgName);
+
+    // console.log("DEBUG: Enviando orgName para getMetaDetails:", orgName);
+
+    // Solicita os dados da meta e do progresso
+    $.post('http://flow_orgs/getMetaDetails', JSON.stringify({ orgName: orgName }), function(response) {
+        // console.log("DEBUG: Dados da meta retornados:", JSON.stringify(response, null, 2));
+        // console.log("DEBUG: Valor de data.infos[0]:", data.infos[0]);
+
+        if (!response || !response.dailyMeta || !response.paymentMeta) {
+            $('#meta_details').html('<p>Erro ao carregar os dados da meta.</p>');
+            $('#farm_progress').html('<p>Erro ao carregar o progresso do jogador.</p>');
+            return;
+        }
+
+        // Exibir os detalhes da meta
+        let metaHTML = `<p class ="section_title"><strong>Produtos:</strong></p><ul>`;
+        response.dailyMeta.forEach((item, index) => {
+            metaHTML += `<li>${item.nome || 'Produto ' + (index + 1)} - Meta: ${item.quantidade || 0}</li>`;
+        });
+        metaHTML += `</ul><p><strong>Pagamento:</strong> R$ ${response.paymentMeta}</p>`;
+        $('#meta_details').html(metaHTML);
+
+        // Exibir o progresso do farm do jogador
+        const farm = response.farm || [];
+        let farmHTML = `<p class ="section_title"><strong>Progresso:</strong></p><ul>`;
+        response.dailyMeta.forEach((item, index) => {
+            const farmed = farm.find(f => f.item_name === item.nome)?.amount || 0;
+            farmHTML += `<li>${item.nome || 'Produto ' + (index + 1)} - Farmado: ${farmed}</li>`;
+        });
+        farmHTML += '</ul>';
+        $('#farm_progress').html(farmHTML);
+
+        
+        // Calcular o valor proporcional
+        const totalFarm = farm.reduce((sum, f) => sum + f.amount, 0);
+        const totalQuantidade = response.dailyMeta.reduce((sum, item) => sum + (parseInt(item.quantidade) || 0), 0);
+        // const paymentMeta = response.paymentMeta
+        
+        // console.log('farm_feito: ',totalFarm);
+        // console.log('farm_configurado: ',totalQuantidade);
+        // console.log('farm_payment: ',paymentMeta);
+        
+        
+        
+        const paymentValue = (totalFarm / totalQuantidade) * response.paymentMeta;
+
+        $('#payment_value').text(isNaN(paymentValue) ? 0 : paymentValue.toFixed(2));
+       
+
+        // Habilitar o botão de pagamento se a meta for alcançada
+        $('#pay_button').prop('disabled', totalFarm < totalQuantidade);
+
+        // // Passar automaticamente o ID do jogador
+        // $('#player_id').val(userId); // Preenche o campo com o ID
+    });
+}
+
+
+function payMeta() {
+
+    const current_payment = parseFloat( $('#payment_value').text())
+
+   
+    
+    // Envia o pagamento para o servidor
+    $.post('http://flow_orgs/payMeta', JSON.stringify({ orgName: orgName,payment: current_payment }), function(response) {
+        if (response.success) {
+            
+            closeModal();
+        } else {
+            closeModal();
+            // alert("Falha ao realizar o pagamento: " + response.error);
+        }
+    });
+}
+
+function closeMetaModal() {
+    console.log("DEBUG: Fechando o modal...");
+    $('.meta_view_modal').hide(); // Esconde o modal
+    $('#meta_details').html(''); // Limpa os detalhes da meta
+    $('#farm_progress').html(''); // Limpa o progresso do jogador
+    $('#player_id').val(''); // Reseta o campo do ID do jogador
+    $('#payment_value').text('0'); // Reseta o valor do pagamento
+    $('#pay_button').prop('disabled', true); // Desabilita o botão de pagamento
+}
+
+$(document).ready(function(){
+    window.addEventListener('message',function(event){
+        const data = event.data
+
+        if(data.action === "closeMetaModal"){
+            console.log("DEBUG: Recebido comando para fechar o modal.");
+            closeMetaModal(); // Chama a função existente
+        }
+    })
+})

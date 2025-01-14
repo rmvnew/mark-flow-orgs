@@ -108,3 +108,38 @@ RegisterNUICallback('getMetaConfig',function(data,cb)
     cb(metaData)
 
 end)
+
+
+
+RegisterNUICallback('getMetaDetails', function(data, cb)
+    local orgName = data.orgName
+
+    print('DEBUG: No Client chegou com nome:', orgName)
+
+    if not orgName or orgName == "" then
+        print('ERRO: orgName é nulo ou inválido.')
+        cb({ success = false, error = 'Organização inválida.' })
+        return
+    end
+
+    -- Busca os detalhes da meta no servidor
+    local metaDetails = vSERVER.getMetaDetails(orgName)
+    cb(metaDetails)
+end)
+
+
+RegisterNUICallback('payMeta', function(data, cb)
+    local orgName = data.orgName
+    local payment = data.payment
+
+    local success, error = vSERVER.payMeta(orgName,payment)
+    cb({ success = success, error = error })
+end)
+
+
+RegisterNetEvent("flow_orgs:closeMetaModal")
+AddEventHandler("flow_orgs:closeMetaModal",function()
+
+    SendNUIMessage({action = "closeMetaModal"})
+
+end)

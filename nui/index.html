@@ -29,7 +29,7 @@
                 </div>
                 <div class="menu">
                     <div class="item_menu config" onclick="openConfigMeta('NomeDaOrganizacao')">Configurar Meta</div>
-                    <div class="item_menu select" >Meta</div>
+                    <div class="item_menu select" onclick="openMetaModal('NomeDaOrganizacao')">Meta</div>
                     <div class="item_menu select" onclick="openSection('painel')">Painel</div>
                     <div class="item_menu bank" onclick="openSection('bank')">Banco</div>
                     <div class="item_menu ranking" onclick="openSection('ranking')">Ranking</div>
@@ -172,10 +172,45 @@
         </div>
 
 
+        <!-- META -->
+        
+        
+        <div class="meta_view_modal" style="display: none;">
+            
+            <input type="hidden" id="metaOrgName">
+            
+            <h2 class="main_section_title">Meta diária</h2>
+            
+            <!-- Informações sobre a meta -->
+            <div id="meta_details">
+                <!-- Preenchido dinamicamente -->
+            </div>
+            
+            <!-- Progresso do farm do jogador -->
+            <h2 class="main_section_title">Progresso do Jogador</h2>
+            <div id="farm_progress">
+                <!-- Preenchido dinamicamente -->
+            </div>
+            
+            
+            <!-- Valor a ser pago -->
+            <p><strong>Valor Total Proporcional:</strong> R$ <span id="payment_value">0</span></p>
+            
+            <!-- Botão para realizar o pagamento -->
+            <button id="pay_button" onclick="payMeta()" disabled>Pagar Meta</button>
+            <button onclick="closeMetaModal()">Fechar</button>
+        </div>
+        
+        
+
+        <!-- META -->
+
+
+        
         <div class="modal meta_config_modal">
-
+            
             <input type="hidden" id="orgName">
-
+            
             <div class="fechar" onclick="closeModal()">+</div>
             <h2>Configurar Meta</h2>
             <div class="meta_form">
