@@ -304,7 +304,7 @@ function openMetaModal() {
         
         
         
-        const paymentValue = (totalFarm / response.totalMeta) * response.paymentMeta;
+        const paymentValue = (totalFarm / totalQuantidade) * response.paymentMeta;
 
         $('#payment_value').text(isNaN(paymentValue) ? 0 : paymentValue.toFixed(2));
 
