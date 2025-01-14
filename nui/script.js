@@ -266,7 +266,7 @@ function openMetaModal() {
     // Solicita os dados da meta e do progresso
     $.post('http://flow_orgs/getMetaDetails', JSON.stringify({ orgName: orgName }), function(response) {
         console.log("DEBUG: Dados da meta retornados:", JSON.stringify(response, null, 2));
-        console.log("DEBUG: Valor de data.infos[0]:", data.infos[0]);
+        // console.log("DEBUG: Valor de data.infos[0]:", data.infos[0]);
 
 
 
@@ -277,7 +277,7 @@ function openMetaModal() {
         }
 
         // Exibir os detalhes da meta
-        let metaHTML = `<p><strong>Produtos:</strong></p><ul>`;
+        let metaHTML = `<p class ="section_title"><strong>Produtos:</strong></p><ul>`;
         response.dailyMeta.forEach((item, index) => {
             metaHTML += `<li>${item.nome || 'Produto ' + (index + 1)} - Meta: ${item.quantidade || 0}</li>`;
         });
@@ -286,7 +286,7 @@ function openMetaModal() {
 
         // Exibir o progresso do farm do jogador
         const farm = response.farm || [];
-        let farmHTML = `<p><strong>Progresso:</strong></p><ul>`;
+        let farmHTML = `<p class ="section_title"><strong>Progresso:</strong></p><ul>`;
         response.dailyMeta.forEach((item, index) => {
             const farmed = farm.find(f => f.item_name === item.nome)?.amount || 0;
             farmHTML += `<li>${item.nome || 'Produto ' + (index + 1)} - Farmado: ${farmed}</li>`;

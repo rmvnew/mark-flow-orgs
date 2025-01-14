@@ -172,41 +172,45 @@
         </div>
 
 
-        <div class="meta_view_modal" style="display: none;">
-
-            <input type="hidden" id="metaOrgName">
-
-            <h3>Configuração da Meta</h3>
+        <!-- META -->
         
+        
+        <div class="meta_view_modal" style="display: none;">
+            
+            <input type="hidden" id="metaOrgName">
+            
+            <h2 class="main_section_title">Meta diária</h2>
+            
             <!-- Informações sobre a meta -->
             <div id="meta_details">
                 <!-- Preenchido dinamicamente -->
             </div>
-        
+            
             <!-- Progresso do farm do jogador -->
-            <h4>Progresso do Jogador</h4>
+            <h2 class="main_section_title">Progresso do Jogador</h2>
             <div id="farm_progress">
                 <!-- Preenchido dinamicamente -->
             </div>
-        
-            <!-- Campo para selecionar o jogador -->
-            <label for="player_id">ID do Jogador:</label>
-            <input type="number" id="player_id" placeholder="ID do jogador">
-        
+            
+            
             <!-- Valor a ser pago -->
             <p><strong>Valor Total Proporcional:</strong> R$ <span id="payment_value">0</span></p>
-        
+            
             <!-- Botão para realizar o pagamento -->
             <button id="pay_button" onclick="payMeta()" disabled>Pagar Meta</button>
             <button onclick="closeModal()">Fechar</button>
         </div>
         
+        
+
+        <!-- META -->
 
 
+        
         <div class="modal meta_config_modal">
-
+            
             <input type="hidden" id="orgName">
-
+            
             <div class="fechar" onclick="closeModal()">+</div>
             <h2>Configurar Meta</h2>
             <div class="meta_form">
