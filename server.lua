@@ -656,88 +656,56 @@ src.getMetaDetails = function(orgName)
             local dailyMeta = json.decode(rows[1].daily_meta or "[]") or {}
             local paymentMeta = rows[1].payment_meta or 0
 
-
             local farmLogs = vRP.query("facs_farm_logs/getFarmLogsForPlayer",{
                 user_id = user_id,
                 org = orgName
             })
 
-
-            -- print(">>>>>>>>>>",dailyMeta)
-
-            -- local totalMeta = 0
-            -- for _,log in ipairs(farmLogs) do
-            --     totalMeta = totalMeta + (log.amount or 0)
-            -- end    
-
-            -- Retorna os dados corretamente
             return {
                 dailyMeta = dailyMeta,
                 paymentMeta = paymentMeta,
-                farm = farmLogs,
-                totalMeta = 0
+                farm = farmLogs
             }
         else
             print("^1[ERRO] Organização não encontrada para orgName: " .. tostring(orgName) .. "^0")
-            return { dailyMeta = {}, paymentMeta = 0, farm = {}, totalMeta = 0 }
+            return { dailyMeta = {}, paymentMeta = 0, farm = {} }
         end
     end
 end
 
 
 
-src.payMeta = function(playerId)
+src.payMeta = function(orgName, payment)
     local source = source
     local user_id = vRP.getUserId(source)
+    local payment = tonumber(payment)
+   
+    if not user_id then
+        return false, "Jogador não encontrado"
+    end    
 
-    if user_id then
-        local targetSource = vRP.getUserSource(playerId)
-        if targetSource then
-            -- Buscar organização do jogador
-            local orgName = vRP.getUserGroupByType(playerId, "organization")
-            if not orgName then
-                return false, "Jogador não pertence a uma organização."
-            end
+    if not orgName or orgName == "" then
+        return false, "Nome da organização inválido."
+    end
 
-            -- Buscar detalhes da meta
-            local rows = vRP.query("flow_orgs/getOrg", { org = orgName })
-            if #rows > 0 then
-                local dailyMeta = json.decode(rows[1].daily_meta or "[]") or {}
-                local paymentMeta = rows[1].payment_meta or 0
+    if not payment or payment <= 0 then
+        return false, "Valor de pagamento inválido."
+    end
 
-                local totalMeta = 0
-                for _, item in ipairs(dailyMeta) do
-                    totalMeta = totalMeta + (tonumber(item.quantidade) or 0)
-                end
+    -- Atualizar os registros de farm do jogador na tabela facs_farm_logs
+    local update_rows = vRP.execute("facs_farm_logs/updateReceived", {
+        user_id = user_id,
+        org_name = orgName,
+    })
 
-                -- Buscar progresso do farm
-                local farmLogs = vRP.query("facs_farm_logs/getFarmLogsForPlayer", { 
-                    user_id = playerId ,
-                    org = orgName
-                })
-                local totalFarm = 0
-
-                for _, log in ipairs(farmLogs) do
-                    totalFarm = totalFarm + (tonumber(log.amount) or 0)
-                end
-
-                -- Calcular valor proporcional
-                local paymentValue = (totalFarm / totalMeta) * paymentMeta
-                paymentValue = math.floor(paymentValue)
-
-                -- Atualizar valores no banco
-                vRP.execute("facs_farm_logs/updateReceived", { user_id = playerId })
-
-                -- Pagar o jogador
-                vRP.giveMoney(playerId, paymentValue)
-
-                print("DEBUG: Pagamento realizado:", paymentValue)
-                return true
-            else
-                return false, "Organização não encontrada."
-            end
-        else
-            return false, "Jogador não encontrado na cidade."
-        end
+    if update_rows then
+        vRP.giveMoney(user_id, payment)
+        print("DEBUG: Pagamento realizado:", payment)
+        TriggerClientEvent("Notify", source, "sucesso", "Pagamento de R$ " .. vRP.format(payment) .. " realizado com sucesso!")
+        TriggerClientEvent("flow_orgs:closeMetaModal",source)
+        return true
+    else
+        return false, "Erro ao atualizar o log de farm."
     end
 end
+

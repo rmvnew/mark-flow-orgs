@@ -129,7 +129,17 @@ end)
 
 
 RegisterNUICallback('payMeta', function(data, cb)
-    local playerId = data.playerId
-    local success, error = vSERVER.payMeta(playerId)
+    local orgName = data.orgName
+    local payment = data.payment
+
+    local success, error = vSERVER.payMeta(orgName,payment)
     cb({ success = success, error = error })
+end)
+
+
+RegisterNetEvent("flow_orgs:closeMetaModal")
+AddEventHandler("flow_orgs:closeMetaModal",function()
+
+    SendNUIMessage({action = "closeMetaModal"})
+
 end)
