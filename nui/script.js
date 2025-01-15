@@ -101,6 +101,8 @@ $(document).ready(function () {
             $(document).ready(()=>{
                 if(orgName && current_exceptions.includes(orgName)){
                     $('.menu_ilegal').hide()
+                }else{
+                    $('.menu_ilegal').show()
                 }
             })
 
