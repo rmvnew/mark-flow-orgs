@@ -2,6 +2,8 @@ let memberSelecioned = null;
 let orgName = null;
 let delay = false;
 
+let current_exceptions = ['Bope','CatCafe','Hospital','LS','Mecanica','Policia','PoliciaCivil','PRF','PoliciaFederal','STO','Turtle','Bombeiros']
+
 $(document).ready(function () {
     window.addEventListener('message', function (event) {
         let data = event.data
@@ -94,6 +96,14 @@ $(document).ready(function () {
                         <option value="${Number(id) + 1}">${cargos[id].prefix}</option>
                 `);
             }
+
+
+            $(document).ready(()=>{
+                if(orgName && current_exceptions.includes(orgName)){
+                    $('.menu_ilegal').hide()
+                }
+            })
+
         }
 
         $("#container").on('click', '.closeButton', function () {
