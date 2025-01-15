@@ -167,6 +167,8 @@ $(document).ready(function () {
 
 $(document).keyup(function (e) {
     if (e.key === "Escape") {
+        closeModal()
+        closeMetaModal()
         $.post('http://flow_orgs/closeNUI', JSON.stringify({}));
     }
 });
