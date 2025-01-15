@@ -229,6 +229,15 @@ function openConfigMeta(){
     })
 }
 
+
+function checkPermission(){
+    $.post('http://flow_orgs/checkPermission',(result)=>{
+        if(result){
+            openConfigMeta() 
+        }
+    })
+}
+
 function saveMeta(){
     const meta = {
         orgName: $('#orgName').val(),

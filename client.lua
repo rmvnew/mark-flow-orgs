@@ -110,6 +110,13 @@ RegisterNUICallback('getMetaConfig',function(data,cb)
 end)
 
 
+RegisterNUICallback('checkPermission',function(_,cb)
+
+    local result = vSERVER.checkPermission()
+    cb(result)
+
+end)
+
 
 RegisterNUICallback('getMetaDetails', function(data, cb)
     local orgName = data.orgName

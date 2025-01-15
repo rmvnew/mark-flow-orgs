@@ -636,6 +636,31 @@ src.getMetaConfig = function(orgName)
 end    
 
 
+src.checkPermission = function()
+
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local permission = "perm.liderilegal"
+
+    if user_id then 
+    
+        if vRP.hasPermission(user_id,permission) then
+        
+            return true
+
+        else
+            TriggerClientEvent("Notify",source,"negado","Você não tem permissão para acesssar essa configuração!",10)
+            return false
+        end
+        
+    end
+
+    return false
+
+end
+
+
+
 vRP.prepare("flow_orgs/getOrg", "SELECT * FROM flow_orgs WHERE org = @org")
 -- vRP.prepare("facs_farm_logs/getFarmLogs", "SELECT item_name, SUM(amount) as amount FROM facs_farm_logs WHERE org_name = @org_name GROUP BY item_name")
 vRP.prepare("facs_farm_logs/getFarmLogsForPlayer", "SELECT item_name, amount FROM facs_farm_logs WHERE user_id = @user_id and org_name = @org and (DATE(date) = CURDATE())")
