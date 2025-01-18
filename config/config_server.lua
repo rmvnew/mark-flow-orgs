@@ -580,6 +580,17 @@ config.groups = {
            [5] = { prefix = "Lider", grupo = "Lider [TURTLE]", permLider = true, permBanco = true, maxMembers = 2 },
         }
     },
+    ["Bennys"] = {
+        maxMembers = 30, -- Defina Esse Valor Apenas 1x proxima vez alterar direto no banco de dados
+        weebhook = "Sua Webhook aqui", -- DEFINA O WEEBHOOK PARA AS TRANSACOES FEITAS NESSA ORGANIZACAO
+        groups = {
+           [1] = { prefix = "Novato", grupo = "Novato [BENNYS]", permLider = false },
+           [2] = { prefix = "Membro", grupo = "Membro [BENNYS]", permLider = false },
+           [3] = { prefix = "Gerente", grupo = "Gerente [BENNYS]", permLider = true, maxMembers = 5 },
+           [4] = { prefix = "Sub-Lider", grupo = "Sub-Lider [BENNYS]", permLider = true, permBanco = true, maxMembers = 3 },
+           [5] = { prefix = "Lider", grupo = "Lider [BENNYS]", permLider = true, permBanco = true, maxMembers = 2 },
+        }
+    },
 }
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

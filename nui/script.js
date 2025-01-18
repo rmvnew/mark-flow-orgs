@@ -171,9 +171,21 @@ $(document).keyup(function (e) {
     if (e.key === "Escape") {
         closeModal()
         closeMetaModal()
+        clear()
         $.post('http://flow_orgs/closeNUI', JSON.stringify({}));
     }
 });
+
+function clear(){
+
+    for(let i = 0; i < 4; i++){
+        document.getElementById(`produto_${i+1}`).value = ''
+        document.getElementById(`quantidade_${i+1}`).value = ''
+    }
+
+    document.getElementById('payment_meta').value = ''
+
+}
 
 function contract(){
     let value = parseInt($("#inviteId").val());
